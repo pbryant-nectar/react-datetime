@@ -366,7 +366,7 @@ var Datetime = React.createClass({
     getComponentProps: function(){
         var me = this,
             formats = this.getFormats( this.props ),
-            props = {dateFormat: formats.date, timeFormat: formats.time, momentObj: moment}
+            props = {dateFormat: formats.date, timeFormat: formats.time, momentObj: moment || OriginalMoment()}
         ;
 
         this.componentProps.fromProps.forEach( function( name ){
