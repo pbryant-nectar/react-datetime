@@ -6,9 +6,8 @@ var assign = require('object-assign'),
     MonthsView = require('./src/MonthsView'),
     YearsView = require('./src/YearsView'),
     TimeView = require('./src/TimeView'),
-    OriginalMoment = require('moment')
+    moment = require('moment')
 ;
-var moment = OriginalMoment;
 
 var TYPES = React.PropTypes;
 var Datetime = React.createClass({
@@ -71,10 +70,6 @@ var Datetime = React.createClass({
             state.open = !this.props.input;
 
         state.currentView = this.props.dateFormat ? (this.props.viewMode || state.updateOn || 'days') : 'time';
-
-        if (this.props.defaultMomentObj) {
-            moment = this.props.defaultMomentObj;
-        }
 
         return state;
     },
@@ -350,7 +345,8 @@ var Datetime = React.createClass({
     },
 
     localMoment: function( date, format ){
-        var momentFn = this.props.utc ? OriginalMoment.utc : OriginalMoment;
+        var momentFn = this.props.utc ? moment.utc : moment;
+        date = date ? date : this.props.defaultMomentObj;
         var m = momentFn( date, format, this.props.strictParsing );
         if ( this.props.locale )
             m.locale( this.props.locale );
@@ -366,7 +362,7 @@ var Datetime = React.createClass({
     getComponentProps: function(){
         var me = this,
             formats = this.getFormats( this.props ),
-            props = {dateFormat: formats.date, timeFormat: formats.time, momentObj: moment || OriginalMoment()}
+            props = {dateFormat: formats.date, timeFormat: formats.time, momentObj:  this.props.defaultMomentObj || moment()}
         ;
 
         this.componentProps.fromProps.forEach( function( name ){
