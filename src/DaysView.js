@@ -1,7 +1,6 @@
 'use strict';
 
-var React = require('react'),
-	moment = require('moment')
+var React = require('react')
 ;
 
 var DOM = React.DOM;
@@ -81,7 +80,7 @@ var DateTimePickerDays = React.createClass({
 			if ( selected && prevMonth.isSame( selected, 'day' ) )
 				classes += ' rdtActive';
 
-			if (prevMonth.isSame( moment(), 'day' ) )
+			if (prevMonth.isSame( this.props.momentObj(), 'day' ) )
 				classes += ' rdtToday';
 
 			isDisabled = !isValid( currentDate, selected );
