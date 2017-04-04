@@ -96,7 +96,7 @@ var Datetime = React.createClass({
         updateOn = this.getUpdateOn(formats);
 
         if ( selectedDate )
-            inputValue = selectedDate.format(formats.datetime);
+            inputValue = selectedDate.tz('Pacific/Auckland').format(formats.datetime);
         else if ( date.isValid && !date.isValid() )
             inputValue = '';
         else
@@ -267,7 +267,7 @@ var Datetime = React.createClass({
         if ( !this.props.value ){
             this.setState({
                 selectedDate: date,
-                inputValue: date.format( state.inputFormat )
+                inputValue: date.tz('Pacific/Auckland').format( state.inputFormat )
             });
         }
         this.props.onChange( date );
