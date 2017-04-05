@@ -54,7 +54,7 @@ var DateTimePickerDays = React.createClass({
 	renderDays: function() {
 		var date = this.props.viewDate,
 			selected = this.props.selectedDate && this.props.selectedDate.clone(),
-			prevMonth = date.clone().subtract( 1, 'months' ),
+			prevMonth = date.clone().subtract( 1, 'months' ).tz('Pacific/Auckland'),
 			currentYear = date.year(),
 			currentMonth = date.month(),
 			weeks = [],
